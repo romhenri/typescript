@@ -34,12 +34,13 @@ h1 {
 
 #slide {
   display: grid;
+  position: relative;
 }
+
 #slide-controls {
   grid-area: 1/1;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  opacity: 0;
 }
 
 #slide-controls button {
@@ -47,4 +48,43 @@ h1 {
   appearance: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   cursor: pointer;
+}
+
+#slide-thumb {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  z-index: 999;
+  pointer-events: none;
+}
+
+#slide-thumb > span {
+  display: block;
+  height: 4px;
+  background: rgba(255,255,255, 0.2);
+  margin: 5px;
+  border-radius: 4px;
+  flex-grow: 1;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+#slide-thumb .thumb-item.active {
+  display: block;
+  height: inherit;
+  background: rgba(255,255,255, 0.6);
+  border-radius: 4px;
+  transform: translateX(-101%);
+  animation: thumb 3s forwards linear running;
+}
+
+#slide-thumb .thumb-item.active.paused {
+  animation-play-state: paused;
+} 
+
+@keyframes thumb {
+  to {
+    transform: initial;
+  }
 }

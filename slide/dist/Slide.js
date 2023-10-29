@@ -9,6 +9,8 @@ export default class Slide {
         this.pausedTimeout = null;
         this.index = 0;
         this.slide = this.slides[this.index];
+        this.ThumbItems = null;
+        this.thumb = null;
         this.paused = false;
         this.init();
     }
@@ -22,6 +24,13 @@ export default class Slide {
     show(index) {
         this.index = index;
         this.slide = this.slides[this.index];
+        if (this.ThumbItems) {
+            this.thumb = this.ThumbItems[this.index];
+            this.ThumbItems.forEach((el) => {
+                el.classList.remove('active');
+            });
+            this.thumb.classList.add('active');
+        }
         this.slides.forEach(el => this.hide(el));
         this.slides[index].classList.add('active');
         if (this.slide instanceof HTMLVideoElement) {
@@ -45,6 +54,8 @@ export default class Slide {
         var _a;
         (_a = this.timeout) === null || _a === void 0 ? void 0 : _a.clear();
         this.timeout = new Timeout(() => this.next(), time);
+        if (this.thumb)
+            this.thumb.style.animationDuration = `${time}ms`;
     }
     prev() {
         if (this.paused)
@@ -60,20 +71,22 @@ export default class Slide {
     }
     pause() {
         this.pausedTimeout = new Timeout(() => {
-            var _a;
+            var _a, _b;
             (_a = this.timeout) === null || _a === void 0 ? void 0 : _a.pause();
             this.paused = true;
+            (_b = this.thumb) === null || _b === void 0 ? void 0 : _b.classList.add('paused');
             if (this.slide instanceof HTMLVideoElement) {
                 this.slide.pause();
             }
         }, 300);
     }
     continue() {
-        var _a, _b;
+        var _a, _b, _c;
         (_a = this.pausedTimeout) === null || _a === void 0 ? void 0 : _a.clear();
         if (this.paused) {
             this.paused = false;
             (_b = this.timeout) === null || _b === void 0 ? void 0 : _b.continue();
+            (_c = this.thumb) === null || _c === void 0 ? void 0 : _c.classList.remove('paused');
             if (this.slide instanceof HTMLVideoElement) {
                 this.slide.play();
             }
@@ -95,8 +108,25 @@ export default class Slide {
         nextButton.addEventListener("pointerup", () => { this.next(); });
         prevButton.addEventListener("pointerup", () => { this.prev(); });
     }
+    addThumbItems() {
+        const thumbContainer = document.createElement('div');
+        thumbContainer.id = 'slide-thumb';
+        for (let i = 0; i < this.slides.length; i++) {
+            thumbContainer.innerHTML += `
+      <span>
+        <span class="thumb-item">
+      
+      
+        </span>
+      </span>
+      `;
+        }
+        this.controls.appendChild(thumbContainer);
+        this.ThumbItems = Array.from(document.querySelectorAll(".thumb-item"));
+    }
     init() {
         this.addControls();
+        this.addThumbItems();
         this.show(this.index);
     }
 }
