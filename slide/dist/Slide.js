@@ -70,6 +70,7 @@ export default class Slide {
         this.show(next);
     }
     pause() {
+        document.body.classList.add('paused');
         this.pausedTimeout = new Timeout(() => {
             var _a, _b;
             (_a = this.timeout) === null || _a === void 0 ? void 0 : _a.pause();
@@ -82,6 +83,7 @@ export default class Slide {
     }
     continue() {
         var _a, _b, _c;
+        document.body.classList.remove('paused');
         (_a = this.pausedTimeout) === null || _a === void 0 ? void 0 : _a.clear();
         if (this.paused) {
             this.paused = false;
@@ -102,9 +104,8 @@ export default class Slide {
         this.controls.addEventListener("pointerdown", () => {
             this.pause();
         });
-        this.controls.addEventListener("pointerup", () => {
-            this.continue();
-        });
+        document.addEventListener("pointerup", () => { this.continue(); });
+        document.addEventListener("touchend", () => { this.continue(); });
         nextButton.addEventListener("pointerup", () => { this.next(); });
         prevButton.addEventListener("pointerup", () => { this.prev(); });
     }
