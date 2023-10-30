@@ -149,8 +149,6 @@ export default class Slide {
       thumbContainer.innerHTML += `
       <span>
         <span class="thumb-item">
-      
-      
         </span>
       </span>
       `
