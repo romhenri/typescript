@@ -18,7 +18,7 @@ function handleData() {
         const transacoes = data.map(normalizarTrasacao);
         if (transacoes) {
             transacoes.forEach((item) => {
-                console.log(item.email);
+                // console.log(item.email);
             });
         }
     });

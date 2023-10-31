@@ -12,7 +12,7 @@ async function handleData() {
 
   if (transacoes) {
     transacoes.forEach((item) => {
-      console.log(item.email);
+      // console.log(item.email);
     });
   }
 }
