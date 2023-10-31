@@ -85,7 +85,6 @@ export default class Slide {
 
     if(this.thumb) this.thumb.style.animationDuration = `${time}ms`;
   }
-
   prev() {
     if (this.paused) return;
     const prev = (this.index - 1) > 0 ? this.index -1  : this.slides.length - 1;
@@ -96,7 +95,6 @@ export default class Slide {
     const next = (this.index + 1) < this.slides.length ? this.index + 1 : 0;
     this.show(next)
   }
-
   pause() {
     document.body.classList.add('paused')
 

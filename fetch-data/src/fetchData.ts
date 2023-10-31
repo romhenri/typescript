@@ -1,4 +1,6 @@
-export default async function fetchData(url: string) {
+export default async function fetchData<Interface>(
+  url: string
+  ): Promise<Interface | null> {
   try {
     const response = await fetch(url);
 
@@ -6,11 +8,11 @@ export default async function fetchData(url: string) {
     throw new Error("Error:" + response.status)
 
     const json = await response.json()
-    await console.log(json);
+    // await console.log(json);
     return json
 
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return null
   }
 }

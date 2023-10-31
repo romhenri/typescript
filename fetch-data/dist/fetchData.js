@@ -14,11 +14,11 @@ export default function fetchData(url) {
             if (!response.ok)
                 throw new Error("Error:" + response.status);
             const json = yield response.json();
-            yield console.log(json);
+            // await console.log(json);
             return json;
         }
         catch (error) {
-            console.log(error);
+            // console.log(error);
             return null;
         }
     });
