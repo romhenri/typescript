@@ -1,5 +1,6 @@
 import fetchData from "./fetchData.js";
 import normalizarTrasacao from "./normalizarTrasacao.js";
+import Stats from "./Stats.js";
 
 console.log("Testando1...");
 var transacoes = null;
@@ -13,14 +14,28 @@ async function handleData() {
 
   if (transacoes) {
     loadTable(transacoes)
+    loadStats(transacoes)
   }
 }
 
 handleData()
 
+function loadStats(transacoes: Transacao[]):void {
+  const data = new Stats(transacoes)
+
+  const totalElement = document.querySelector<HTMLElement>('.total span')
+
+  if (!totalElement) return
+   
+  totalElement.innerText = `${data.total.toLocaleString("pt-br", {
+    style: "currency",
+    currency: "BRL"
+  })}`
+}
+
 function loadTable(readyData: Transacao[]):void {
   const table = document.querySelector("table tbody")
-  console.log(table);
+  // console.log(table);
 
   if(!table) return
   

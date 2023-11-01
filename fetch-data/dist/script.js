@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import fetchData from "./fetchData.js";
 import normalizarTrasacao from "./normalizarTrasacao.js";
+import Stats from "./Stats.js";
 console.log("Testando1...");
 var transacoes = null;
 function handleData() {
@@ -19,13 +20,24 @@ function handleData() {
         transacoes = data.map(normalizarTrasacao);
         if (transacoes) {
             loadTable(transacoes);
+            loadStats(transacoes);
         }
     });
 }
 handleData();
+function loadStats(transacoes) {
+    const data = new Stats(transacoes);
+    const totalElement = document.querySelector('.total span');
+    if (!totalElement)
+        return;
+    totalElement.innerText = `${data.total.toLocaleString("pt-br", {
+        style: "currency",
+        currency: "BRL"
+    })}`;
+}
 function loadTable(readyData) {
     const table = document.querySelector("table tbody");
-    console.log(table);
+    // console.log(table);
     if (!table)
         return;
     readyData.forEach((item) => {
