@@ -24,16 +24,18 @@ declare global {
   interface Transacao {
     nome: string;
     id: number;
-    data: string;
+    dataNominal: string;
+    data: Date;
     status: TransacaoStatus;
     email: string;
+    moeda: string;
     valor: number | null;
     pagamento: TransacaoPagamento;
     novo: boolean;
   }
 }
 
-export default function normalizarTrasacao(transacao: TransacaoAPI) {
+export default function normalizarTrasacao(transacao: TransacaoAPI): Transacao {
 
   return {
     nome: transacao.Nome,

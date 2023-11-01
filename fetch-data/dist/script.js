@@ -9,18 +9,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import fetchData from "./fetchData.js";
 import normalizarTrasacao from "./normalizarTrasacao.js";
-console.log("Testando...");
+console.log("Testando1...");
+var transacoes = null;
 function handleData() {
     return __awaiter(this, void 0, void 0, function* () {
         const data = yield fetchData("https://api.origamid.dev/json/transacoes.json?");
         if (!data)
             return;
-        const transacoes = data.map(normalizarTrasacao);
+        transacoes = data.map(normalizarTrasacao);
         if (transacoes) {
-            transacoes.forEach((item) => {
-                // console.log(item.email);
-            });
+            loadTable(transacoes);
         }
     });
 }
 handleData();
+function loadTable(readyData) {
+    const table = document.querySelector("table tbody");
+    console.log(table);
+    if (!table)
+        return;
+    readyData.forEach((item) => {
+        table.innerHTML += `
+    <tr>
+      <td>${item.nome}</td>
+      <td>${item.email}</td>
+      <td>${item.moeda}</td>
+      <td>${item.pagamento}</td>
+      <td>${item.status}</td>
+    </tr>
+    `;
+    });
+}
