@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import fetchData from "./fetchData.js";
 import normalizarTrasacao from "./normalizarTrasacao.js";
 import Stats from "./Stats.js";
-console.log("Testando1...");
+console.log("Testando...");
 var transacoes = null;
 function handleData() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -25,12 +25,23 @@ function handleData() {
     });
 }
 handleData();
+function loadList(list, containerId) {
+    const element = document.getElementById(containerId);
+    if (element) {
+        Object.keys(list).forEach((key) => {
+            element.innerHTML += `<span>${key}: ${list[key]}</span>`;
+        });
+    }
+}
 function loadStats(transacoes) {
-    const data = new Stats(transacoes);
+    const dataStats = new Stats(transacoes);
+    loadList(dataStats.paymentsTotal, "paymentsTotal");
+    loadList(dataStats.statusTotal, "statusTotal");
+    console.log(dataStats);
     const totalElement = document.querySelector('.total span');
     if (!totalElement)
         return;
-    totalElement.innerText = `${data.total.toLocaleString("pt-br", {
+    totalElement.innerText = `${dataStats.total.toLocaleString("pt-br", {
         style: "currency",
         currency: "BRL"
     })}`;

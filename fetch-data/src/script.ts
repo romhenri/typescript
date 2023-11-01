@@ -1,8 +1,9 @@
+import { CountList } from "./countBy.js";
 import fetchData from "./fetchData.js";
 import normalizarTrasacao from "./normalizarTrasacao.js";
 import Stats from "./Stats.js";
 
-console.log("Testando1...");
+console.log("Testando...");
 var transacoes = null;
 
 async function handleData() {
@@ -20,14 +21,27 @@ async function handleData() {
 
 handleData()
 
+function loadList(list: CountList, containerId: string) {
+  const element = document.getElementById(containerId);
+  if (element) {
+    Object.keys(list).forEach((key) => {
+      element.innerHTML += `<span>${key}: ${list[key]}</span>`
+    })
+  }
+}
+
 function loadStats(transacoes: Transacao[]):void {
-  const data = new Stats(transacoes)
+  const dataStats = new Stats(transacoes)
+
+  loadList(dataStats.paymentsTotal, "paymentsTotal")
+  loadList(dataStats.statusTotal, "statusTotal")
+  console.log(dataStats);
+  
 
   const totalElement = document.querySelector<HTMLElement>('.total span')
 
   if (!totalElement) return
-   
-  totalElement.innerText = `${data.total.toLocaleString("pt-br", {
+  totalElement.innerText = `${dataStats.total.toLocaleString("pt-br", {
     style: "currency",
     currency: "BRL"
   })}`
