@@ -14,6 +14,11 @@ body.paused {
   touch-action: manipulation;
 }
 
+#slide {
+  max-width: 1080px;
+  margin: auto;
+}
+
 img, video {
   display: block;
   max-width: 100%;
