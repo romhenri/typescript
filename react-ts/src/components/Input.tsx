@@ -14,13 +14,16 @@ const Input = (
 ) => {
 
   return (
-    <div>
-      <label htmlFor={label}>{label}</label>
-      <input id={label} name={label} 
-      onChange={
-        ({currentTarget}) => setState(currentTarget.value)
-      }
-      type="text" {...props} />
+    <div className="input-div">
+      <label htmlFor={label}>{label}:</label>
+      <input 
+        id={label} 
+        name={label} 
+        onChange={
+          ({currentTarget}) => setState(currentTarget.value)}
+        type="text"
+        {...props}
+        />
     </div>
   )
 }
