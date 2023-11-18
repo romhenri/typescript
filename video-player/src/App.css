@@ -1,0 +1,15 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+video {
+  max-width: 100%;
+  width: 1080px;
+}
+
+button {
+  margin: 10px 5px;
+}
