@@ -1,14 +1,43 @@
 import { useState, useEffect, useRef } from 'react'
+import useLocalStorage from './useLocalStorage';
 import videoSrc from './video.mp4'
 import './App.css'
 
 function App() {
   const video = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [volume, setVolume] = useLocalStorage("volume", "0")
 
-  useEffect(() => {
-    console.log('Teste');
-  })
+  // useEffect(() => {
+  //   console.log('Teste');
+  // })
+
+  useEffect(()=> {
+    if (!video.current) return;
+    const volumeValue = Number(volume);
+    video.current.volume = volumeValue;
+    // console.log(volumeValue);
+  }, [volume])
+
+  const decreaseVolume = () => {
+    const volumeValue = Number(volume);
+    let newVolume = volumeValue - .05;
+
+    if (newVolume <= 0) {
+      newVolume = 0;
+    } 
+    setVolume(`${newVolume}`);
+  }
+
+  const increaseVolume = () => {
+    const volumeValue = Number(volume);
+    let newVolume = volumeValue + .05;
+
+    if (newVolume >= 1) {
+      newVolume = 1;
+    } 
+    setVolume(`${newVolume}`)
+  }
 
   function forward() {
     if (!video.current) return;
@@ -86,6 +115,29 @@ function App() {
         onPause={() => setPlaying(false)}
         >
       </video>
+      <div className='flex'>
+        <button onClick={() => setVolume("0")}>
+          0%
+        </button>
+        <button onClick={() => setVolume(".25")}>
+          25%
+        </button>
+        <button onClick={decreaseVolume}>
+          -
+        </button>
+        <div className='volume'>
+          <p>{(Number(volume) * 100).toFixed(0)}%</p>
+        </div>
+        <button onClick={increaseVolume}>
+          +
+        </button>
+        <button onClick={() => setVolume(".5")}>
+          50%
+        </button>
+        <button onClick={() => setVolume("1")}>
+          100%
+        </button>
+      </div>
     </div>
   )
 }

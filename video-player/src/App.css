@@ -13,3 +13,13 @@ video {
 button {
   margin: 10px 5px;
 }
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.volume {
+  margin: 0px 15px;
+}
