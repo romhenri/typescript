@@ -1,0 +1,25 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+section {
+  display: flex;
+}
+
+.buttons-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+section .data-div {
+  text-align: start;
+  width: 400px;
+}
+
+.card {
+  padding: 2em;
+}
