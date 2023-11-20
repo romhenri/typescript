@@ -20,7 +20,8 @@ function useFetch<T>(
     const fetchData = async () => {
       setLoading(true);
       setData(null);
-      
+      // console.log("url: ", url);
+
       try {
         const response = await fetch(url, {
           signal,
@@ -32,7 +33,8 @@ function useFetch<T>(
         `)
         const json =(await response.json()) as T;
         if(!signal.aborted) setData(json);
-
+        // console.log("data: ", json);
+        
       } catch(error) {
         if (!signal.aborted && error instanceof Error) setError(error.message)
         console.log(error);
