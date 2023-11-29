@@ -1,6 +1,5 @@
-import React from 'react'
 import styled from 'styled-components';
-import DateInput from './DateInput'
+import DateInput from './DateInput';
 import { useData } from '../context/DataContext';
 
 const DataRangeForm = styled.form`

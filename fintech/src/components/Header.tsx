@@ -1,6 +1,7 @@
 import { useData } from "../context/DataContext"
 import styled from "styled-components";
 import DateRange from "./DateRange";
+import Months from "./Months";
 
 const HeaderDiv = styled.div`
   display: flex;
@@ -15,9 +16,12 @@ const Header = () => {
   const { data } = useData();
   
   return (
-    <HeaderDiv>
-      <DateRange />
-    </HeaderDiv>
+    <div>
+      <HeaderDiv>
+        <DateRange />
+      </HeaderDiv>
+      <Months />
+    </div>
   )
 }
 
