@@ -1,7 +1,8 @@
 import styled from "styled-components"
+import { NavLink } from "react-router-dom";
 import { AiFillCarryOut } from "react-icons/ai";
 import { SiMarketo } from "react-icons/si";
-import {MdOutlineWeb,MdContacts} from "react-icons/md";
+import { MdOutlineWeb,MdContacts } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoIosExit } from "react-icons/io";
 
@@ -16,6 +17,9 @@ const Nav = styled.nav`
     font-size: 1.6rem;
     font-weight: 600;
     color: var(--color1);
+  }
+  & a {
+    text-decoration: none;
   }
   & ul {
     padding: 0px;
@@ -51,14 +55,20 @@ const SideNav = () => {
         <h1>Fintech</h1>
       </div>
       <ul>
-        <li>
-          <AiFillCarryOut />
-          Resumo
-        </li>
-        <li>
-          <SiMarketo />
-          Vendas
-        </li>
+        <NavLink to={"/"}>
+          <li>
+            <AiFillCarryOut />
+            Resumo
+          </li>
+        </NavLink>
+
+        <NavLink to={"vendas"}>
+          <li>
+            <SiMarketo />
+            Vendas
+          </li>
+        </NavLink>
+        
         <li>
           <MdOutlineWeb />
           Webhooks

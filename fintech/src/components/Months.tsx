@@ -3,8 +3,14 @@ import styled from 'styled-components'
 
 const MonthsDiv = styled.div`
   display: flex;
+  max-width: 570px;
+  margin: auto;
   justify-content: center;
   gap: 10px;
+
+  & button {
+    flex-grow: 1;
+  }
 `
 
 const Months = () => {

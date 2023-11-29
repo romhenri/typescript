@@ -1,6 +1,7 @@
-import React from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import { IVenda } from '../context/DataContext';
 import styled from 'styled-components';
+import useFetch from '../hooks/useFetch';
 
 const SaleDiv = styled.div`
   display: flex;
@@ -14,32 +15,42 @@ const SaleDiv = styled.div`
   margin: auto;
   margin-bottom: 8px;
   box-sizing: border-box;
-
-  a {
-    color: var(--color1);
+  cursor: pointer;
+  
+  &:hover {
+    transition: all .2s;
+    background-color: var(--color7);
+  }
+  & p {
     font-family: monospace;
   }
-
   & .price {
     margin-left: auto;
   }
 `
 
 const Sale = ({sale}: {sale: IVenda}) => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const {data, loading} = useFetch<IVenda>(`
+    https://data.origamid.dev/vendas/${id}
+  `)
+
   return (
-    <SaleDiv>
-      <a href="">
-        {sale.id}
-      </a>
+      <SaleDiv 
+        onClick={() => {navigate(`/vendas/${sale.id}`)}}
+      >
+        <p>{sale.id}</p>
 
-      <div>{sale.nome}</div>
-      <div className='price'>
-        {sale.preco.toLocaleString(
-        'pt-BR', {style: 'currency', currency: 'BRL'}
-        )}
-      </div>
+        <div>{sale.nome}</div>
+        <div className='price'>
+          {sale.preco.toLocaleString(
+          'pt-BR', {style: 'currency', currency: 'BRL'}
+          )}
+        </div>
 
-    </SaleDiv>
+      </SaleDiv>
   )
 }
 

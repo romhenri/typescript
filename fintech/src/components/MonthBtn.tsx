@@ -8,9 +8,10 @@ const MonthButton = styled.button`
   color: var(--color1);
   background-color: var(--color4);
   border: none;
-  border-radius: 10px;
+  border-radius:5px;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  justify-content: center;
 `
 
 function nameMonth(n: number) {

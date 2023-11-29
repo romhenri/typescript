@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Ul = styled.ul`
   list-style: none;
-  margin: auto;
+  margin: 10px auto;
   padding: 0px 15px;
 `
 
