@@ -16,6 +16,17 @@ html {
   padding: 0;
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+main, nav {
+  margin: 10px 0px;
+  max-width: 980px;
+}
+
 body {
   background-color: var(--color6);
   color: var(--color-text1);
@@ -43,3 +54,4 @@ h1,h2,h3 {
 .flex-grow > * {
   flex-grow: 1;
 }
+

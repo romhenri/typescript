@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import { DataContextProvider } from './context/DataContext'
-import ResumePage from './pages/ResumePage'
 import SideNav from './pages/SideNav'
 import Header from './components/Header'
+import ResumePage from './pages/ResumePage'
+import SalesPage from './pages/SalesPage'
 import './App.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <main>
           <Header/>
           <ResumePage/>
+          <SalesPage/>
         </main>
       </DataContextProvider>
     </>
